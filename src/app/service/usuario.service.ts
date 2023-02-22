@@ -15,4 +15,12 @@ export class UsuarioService {
   listarTodos() {
     return this.$http.get<UsuarioSemSenhaDTO[]>(`${this.API}`)
   }
+
+  receberUsuario(id: any) {
+    return this.$http.get<UsuarioSemSenhaDTO>(`${this.API}/${id}`)
+  }
+
+  excluirUsuario(id: any) {
+    return this.$http.delete(`${this.API}/${id}`)
+  }
 }
