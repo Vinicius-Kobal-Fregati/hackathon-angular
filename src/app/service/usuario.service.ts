@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { UsuarioSemSenhaDTO } from '../DTO/UsuarioSemSenhaDTO';
+import { UsuarioCriacaoDTO } from '../DTO/UsuarioCriacaoDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,13 @@ export class UsuarioService {
 
   excluirUsuario(id: any) {
     return this.$http.delete(`${this.API}/${id}`)
+  }
+
+  adicionarUsuario(usuario: UsuarioCriacaoDTO) {
+    return this.$http.post(this.API, usuario)
+  }
+
+  editarUsuario(usuario: UsuarioCriacaoDTO) {
+    return this.$http.put(`${this.API}/${usuario.id}`, usuario)
   }
 }
