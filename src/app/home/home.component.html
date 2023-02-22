@@ -1,1 +1,26 @@
 <p>home works!</p>
+
+<table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Nome</th>
+        <th>login</th>
+        <th>Email</th>
+        <th>Data de nascimento</th>
+        <th>Data de criação</th>
+        <th>Data de atualização</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <th>{{usuario.id}}</th>
+        <td>{{usuario.nome}}</td>
+        <td>{{usuario.login}}</td>
+        <td>{{usuario.email}}</td>
+        <td>{{usuario.dataDeNascimento}}</td>
+        <td>{{usuario.dataDeCriacao}}</td>
+        <td>{{usuario.dataDeAtualizacao}}</td>
+      </tr>
+    </tbody>
+</table>

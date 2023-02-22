@@ -1,4 +1,4 @@
-export class Usuario {
+export class UsuarioSemSenhaDTO {
     id?: number
     nome?: string
     login?: string

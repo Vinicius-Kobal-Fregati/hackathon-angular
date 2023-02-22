@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsuarioSemSenhaDTO } from '../DTO/UsuarioSemSenhaDTO';
+import { UsuarioService } from '../service/usuario.service';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +11,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   id: number
+  usuarios: Array<UsuarioSemSenhaDTO> = []
 
   constructor(
+    private usuarioService: UsuarioService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -21,6 +25,9 @@ export class HomeComponent implements OnInit {
         this.id = parametros['id']
       }
     })
+    this.usuarioService.listarTodos().subscribe((users) => {
+      this.usuarios = users
+    }
+    )
   }
-
 }

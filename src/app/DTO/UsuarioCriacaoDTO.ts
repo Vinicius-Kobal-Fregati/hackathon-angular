@@ -1,4 +1,4 @@
-export class Usuario {
+export class UsuarioCriacaoDTO {
     id?: number
     nome?: string
     login?: string
