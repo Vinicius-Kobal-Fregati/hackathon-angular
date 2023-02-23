@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UsuarioCriacaoDTO } from '../DTO/UsuarioCriacaoDTO';
+import { DatePipe, formatDate } from '@angular/common';
 
 import { UsuarioService } from '../service/usuario.service';
 import { Encriptor } from '../Utils/Encriptor';
@@ -14,23 +15,55 @@ export class CadastroComponent implements OnInit {
 
   id: any 
   usuario: UsuarioCriacaoDTO = new UsuarioCriacaoDTO() 
+  textoBotao: string = 'Salvar'
+  dataLocal: string
 
   constructor(
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-  }
-
-  salvar = () => {
-    this.usuario.senha = Encriptor.encriptografaSenha(this.usuario.senha)
-    this.usuarioService.adicionarUsuario(this.usuario).subscribe({
-      complete: () => {
-        this.router.navigate(['home'])
-      },
-      error: () => alert("Erro ao salvar")
+    this.activatedRoute.params.subscribe(parametros => {
+      if (parametros['id']) {
+        this.id = parametros['id']
+        this.textoBotao = 'Editar'
+        this.usuarioService.receberUsuario(this.id).subscribe(usuario => {
+          this.dataLocal = formatDate(usuario.dataDeNascimento, 'yyyy-MM-dd', 'en-US') 
+          this.usuario = usuario
+        })
+      }
     })
   }
 
+  salvar = () => {
+    this.usuario.dataDeNascimento = new Date(this.dataLocal)
+    this.usuario.senha = Encriptor.encriptografaSenha(this.usuario.senha)
+    if (this.id > 0) {
+      this.editar()
+    } else {
+      this.usuarioService.adicionarUsuario(this.usuario).subscribe({
+        complete: () => {
+          this.router.navigate(['home'])
+        },
+        error: () => {
+          this.usuario.senha = Encriptor.descriptografaSenha(this.usuario.senha)
+          alert("Erro ao salvar")
+        }
+      })
+    }
+  }
+
+  editar = () => {
+    this.usuarioService.editarUsuario(this.usuario).subscribe({
+      complete: () => {
+        this.router.navigate(['home'])
+      },
+      error: () => {
+        this.usuario.senha = Encriptor.descriptografaSenha(this.usuario.senha)
+        alert("Erro ao salvar")
+      }
+    })
+  }
 }
