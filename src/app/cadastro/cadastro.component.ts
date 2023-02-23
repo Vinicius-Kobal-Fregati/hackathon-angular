@@ -16,7 +16,6 @@ export class CadastroComponent implements OnInit {
   id: any 
   usuario: UsuarioCriacaoDTO = new UsuarioCriacaoDTO() 
   textoBotao: string = 'Salvar'
-  dataLocal: string
 
   constructor(
     private usuarioService: UsuarioService,
@@ -30,7 +29,7 @@ export class CadastroComponent implements OnInit {
         this.id = parametros['id']
         this.textoBotao = 'Editar'
         this.usuarioService.receberUsuario(this.id).subscribe(usuario => {
-          this.dataLocal = formatDate(usuario.dataDeNascimento, 'yyyy-MM-dd', 'en-US') 
+          usuario.dataDeNascimento = new Date(usuario.dataDeNascimento[0], usuario.dataDeNascimento[1] -1, usuario.dataDeNascimento[2])
           this.usuario = usuario
         })
       }
@@ -38,7 +37,6 @@ export class CadastroComponent implements OnInit {
   }
 
   salvar = () => {
-    this.usuario.dataDeNascimento = new Date(this.dataLocal)
     this.usuario.senha = Encriptor.encriptografaSenha(this.usuario.senha)
     if (this.id > 0) {
       this.editar()

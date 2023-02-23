@@ -35,6 +35,10 @@ export class HomeComponent implements OnInit {
 
   receberTodosUsuarios = () => {
     this.usuarioService.listarTodos().subscribe((users) => {
+      users.forEach((user) => {
+        let dataCriacao = user.dataDeCriacao
+        user.dataDeCriacao = new Date(dataCriacao[0], dataCriacao[1] - 1, dataCriacao[2], dataCriacao[3], dataCriacao[4])
+      })
       this.usuarios = users
     })
   }

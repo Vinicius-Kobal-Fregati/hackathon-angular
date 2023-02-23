@@ -33,7 +33,7 @@
             <td>{{usuario.login}}</td>
             <td>{{usuario.email}}</td>
             <td>{{usuario.dataDeNascimento | date: 'dd/MM/yyyy'}}</td>
-            <td>{{usuario.dataDeCriacao}}</td>
+            <td>{{usuario.dataDeCriacao | date: 'dd/MM/yyyy HH:mm'}}</td>
             <td>{{usuario.dataDeAtualizacao}}</td>
             <td><button pButton type="button" class="p-button-raised p-button-rounded p-button-danger p-button-sm"
               (click) = "excluirUsuario(usuario.id)" icon="pi pi-trash"></button></td>
