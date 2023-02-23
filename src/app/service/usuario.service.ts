@@ -32,4 +32,8 @@ export class UsuarioService {
   editarUsuario(usuario: UsuarioCriacaoDTO) {
     return this.$http.put(`${this.API}/${usuario.id}`, usuario)
   }
+
+  buscarAniversariantes(id: any) {
+    return this.$http.get(`${this.API}/aniversariantes/${id}`)
+  }
 }
