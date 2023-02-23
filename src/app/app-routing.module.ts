@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { AniversariantesComponent } from './aniversariantes/aniversariantes.component';
+import { EmailsComponent } from './emails/emails.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: 'home/:id', component: HomeComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'cadastro/:id', component: CadastroComponent },
-  { path: 'aniversariantes/:id', component: AniversariantesComponent}
+  { path: 'aniversariantes/:id', component: AniversariantesComponent },
+  { path: 'emails', component: EmailsComponent }
 ];
 
 @NgModule({

@@ -10,13 +10,15 @@ import { HomeComponent } from './home/home.component';
 import { UsuarioService } from './service/usuario.service';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { AniversariantesComponent } from './aniversariantes/aniversariantes.component';
+import { EmailsComponent } from './emails/emails.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CadastroComponent,
-    AniversariantesComponent
+    AniversariantesComponent,
+    EmailsComponent
   ],
   imports: [
     BrowserModule,

@@ -36,4 +36,8 @@ export class UsuarioService {
   buscarAniversariantes(id: any) {
     return this.$http.get(`${this.API}/aniversariantes/${id}`)
   }
+
+  buscarProvedoresEmail() {
+    return this.$http.get(`${this.API}/emails`)
+  }
 }
