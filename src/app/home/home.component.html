@@ -18,7 +18,7 @@
         <td>{{usuario.nome}}</td>
         <td>{{usuario.login}}</td>
         <td>{{usuario.email}}</td>
-        <td>{{usuario.dataDeNascimento}}</td>
+        <td>{{usuario.dataDeNascimento | date: 'dd/MM/yyyy'}}</td>
         <td>{{usuario.dataDeCriacao}}</td>
         <td>{{usuario.dataDeAtualizacao}}</td>
         <td><button type="button" (click) = "excluirUsuario(usuario.id)">Excluir</button></td>
