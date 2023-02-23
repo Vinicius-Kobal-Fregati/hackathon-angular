@@ -9,12 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { UsuarioService } from './service/usuario.service';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { AniversariantesComponent } from './aniversariantes/aniversariantes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CadastroComponent
+    CadastroComponent,
+    AniversariantesComponent
   ],
   imports: [
     BrowserModule,
