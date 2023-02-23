@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { AniversariantesComponent } from './aniversariantes/aniversariantes.component';
 import { EmailsComponent } from './emails/emails.component';
+import { LetraInicialComponent } from './letra-inicial/letra-inicial.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent },
   { path: 'cadastro/:id', component: CadastroComponent },
   { path: 'aniversariantes/:id', component: AniversariantesComponent },
-  { path: 'emails', component: EmailsComponent }
+  { path: 'emails', component: EmailsComponent },
+  { path: 'inicial/:caracter', component: LetraInicialComponent}
 ];
 
 @NgModule({

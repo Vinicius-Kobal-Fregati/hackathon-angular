@@ -40,4 +40,8 @@ export class UsuarioService {
   buscarProvedoresEmail() {
     return this.$http.get(`${this.API}/emails`)
   }
+
+  buscaUsuarioPelaInicial(caracter: string) {
+    return this.$http.get(`${this.API}/primeira-letra-nome/${caracter}`)
+  }
 }

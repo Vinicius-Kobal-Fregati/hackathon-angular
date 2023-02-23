@@ -11,6 +11,7 @@ import { UsuarioService } from './service/usuario.service';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { AniversariantesComponent } from './aniversariantes/aniversariantes.component';
 import { EmailsComponent } from './emails/emails.component';
+import { LetraInicialComponent } from './letra-inicial/letra-inicial.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EmailsComponent } from './emails/emails.component';
     HomeComponent,
     CadastroComponent,
     AniversariantesComponent,
-    EmailsComponent
+    EmailsComponent,
+    LetraInicialComponent
   ],
   imports: [
     BrowserModule,
