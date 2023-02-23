@@ -25,9 +25,13 @@ export class AniversariantesComponent implements OnInit {
   }
 
   buscarAniversariantes = () => {
-    this.usuarioService.buscarAniversariantes(this.id).subscribe((usuario: Array<UsuarioSemSenhaDTO>) => {
-      if (usuario.length > 0) {
-        this.usuarios = usuario
+    this.usuarioService.buscarAniversariantes(this.id).subscribe((usuarios: Array<UsuarioSemSenhaDTO>) => {
+      if (usuarios.length > 0) {
+        usuarios.forEach((usuario) => {
+          let dataCriacao = usuario.dataDeCriacao
+          usuario.dataDeCriacao = new Date(dataCriacao[0], dataCriacao[1] - 1, dataCriacao[2], dataCriacao[3], dataCriacao[4])
+        })
+        this.usuarios = usuarios
       } else {
         alert("Nenhum aniversariante encontrado")
       }

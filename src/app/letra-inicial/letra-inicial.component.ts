@@ -26,6 +26,10 @@ export class LetraInicialComponent implements OnInit {
 
   recebeUsuarioPelaInicial = () => {
     this.usuarioService.buscaUsuarioPelaInicial(this.caracter.charAt(0)).subscribe((usuarios: Array<UsuarioSemSenhaDTO>) => {
+      usuarios.forEach((usuario) => {
+        let dataCriacao = usuario.dataDeCriacao
+        usuario.dataDeCriacao = new Date(dataCriacao[0], dataCriacao[1] - 1, dataCriacao[2], dataCriacao[3], dataCriacao[4])
+      })
       this.usuarios = usuarios
     })
   }
