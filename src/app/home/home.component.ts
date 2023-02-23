@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
 
   id: number
   usuarios: Array<UsuarioSemSenhaDTO> = []
+  first = 0;
+  rows = 10;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -48,5 +50,25 @@ export class HomeComponent implements OnInit {
       success => this.ngOnInit(),
       error => alert("Item não excluído" + error)
     )
+  }
+
+  next() {
+    this.first = this.first + this.rows;
+  }
+
+  prev() {
+      this.first = this.first - this.rows;
+  }
+
+  reset() {
+      this.first = 0;
+  }
+
+  isLastPage(): boolean {
+      return this.usuarios ? this.first === (this.usuarios.length - this.rows): true;
+  }
+
+  isFirstPage(): boolean {
+      return this.usuarios ? this.first === 0 : true;
   }
 }

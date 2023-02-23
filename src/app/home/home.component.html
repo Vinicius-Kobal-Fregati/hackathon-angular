@@ -1,27 +1,49 @@
-<p>home works!</p>
-
-<table>
-    <thead>
-      <tr>
-        <th>id</th>
-        <th>Nome</th>
-        <th>login</th>
-        <th>Email</th>
-        <th>Data de nascimento</th>
-        <th>Data de criação</th>
-        <th>Data de atualização</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let usuario of usuarios">
-        <th>{{usuario.id}}</th>
-        <td>{{usuario.nome}}</td>
-        <td>{{usuario.login}}</td>
-        <td>{{usuario.email}}</td>
-        <td>{{usuario.dataDeNascimento | date: 'dd/MM/yyyy'}}</td>
-        <td>{{usuario.dataDeCriacao}}</td>
-        <td>{{usuario.dataDeAtualizacao}}</td>
-        <td><button type="button" (click) = "excluirUsuario(usuario.id)">Excluir</button></td>
-      </tr>
-    </tbody>
-</table>
+<div class="card">
+  <h5>Usuarios</h5>
+  <p-table [value]="usuarios" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" styleClass="p-datatable-gridlines"
+      currentPageReportTemplate="Exibindo do {first}° até o {last}° de {totalRecords} usuários" [rowsPerPageOptions]="[10,25,50]">
+      <ng-template pTemplate="colgroup">
+        <colgroup>
+            <col style="width:8%">
+            <col style="width:15%">
+            <col style="width:15%">
+            <col style="width:30%">
+            <col style="width:16%">
+            <col style="width:20%">
+            <col style="width:35%">
+            <col style="width:12%">
+        </colgroup>
+    </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+            <th>id</th>
+            <th>Nome</th>
+            <th>login</th>
+            <th>Email</th>
+            <th>Data de nascimento</th>
+            <th>Data de criação</th>
+            <th>Data de atualização</th>
+            <th>Excluir</th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-usuario>
+          <tr>
+            <td>{{usuario.id}}</td>
+            <td>{{usuario.nome}}</td>
+            <td>{{usuario.login}}</td>
+            <td>{{usuario.email}}</td>
+            <td>{{usuario.dataDeNascimento | date: 'dd/MM/yyyy'}}</td>
+            <td>{{usuario.dataDeCriacao}}</td>
+            <td>{{usuario.dataDeAtualizacao}}</td>
+            <td><button pButton type="button" class="p-button-raised p-button-rounded p-button-danger p-button-sm"
+              (click) = "excluirUsuario(usuario.id)" icon="pi pi-trash"></button></td>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+          <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+          <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+      </ng-template>
+  </p-table>
+</div>
