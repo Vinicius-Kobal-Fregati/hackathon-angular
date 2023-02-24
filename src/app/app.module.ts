@@ -7,7 +7,8 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
 import { TooltipModule } from 'primeng/tooltip';
-import {ToolbarModule} from 'primeng/toolbar';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ToastModule } from 'primeng/toast';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -39,7 +40,8 @@ import { LetraInicialComponent } from './letra-inicial/letra-inicial.component';
     TableModule,
     CalendarModule,
     TooltipModule,
-    ToolbarModule
+    ToolbarModule,
+    ToastModule
   ],
   providers: [UsuarioService],
   bootstrap: [AppComponent]

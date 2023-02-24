@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 import { UsuarioCriacaoDTO } from '../DTO/UsuarioCriacaoDTO';
 import { UsuarioService } from '../service/usuario.service';
@@ -10,7 +11,8 @@ import { AjustadorDeDatas } from '../Utils/AjustadorDeDatas';
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.component.html',
-  styleUrls: ['./cadastro.component.css']
+  styleUrls: ['./cadastro.component.css'],
+  providers: [MessageService]
 })
 export class CadastroComponent implements OnInit {
 
@@ -21,7 +23,8 @@ export class CadastroComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private message: MessageService,
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +51,7 @@ export class CadastroComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           this.usuario.senha = Encriptor.descriptografaSenha(this.usuario.senha)
-          alert("Erro ao salvar: " + error.error)
+          this.addSingle("Erro ao salvar", error.error)
         }
       })
     }
@@ -61,8 +64,12 @@ export class CadastroComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.usuario.senha = Encriptor.descriptografaSenha(this.usuario.senha)
-        alert("Erro ao editar: " + error.error)
+        this.addSingle('Erro ao editar', error.error)
       }
     })
+  }
+
+  addSingle(summary: string, detail: string) {
+    this.message.add({key: 'mensagemDeErro', severity:'error', summary:summary, detail:detail});
   }
 }
