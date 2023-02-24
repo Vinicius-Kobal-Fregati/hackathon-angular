@@ -1,9 +1,9 @@
 #cadastro {
     background: #2a323d;
     border: 1px solid #3f4b5b;
+    width: 300px;
     padding: 1rem 1.25rem;
     border-radius: 4px;
-    border: 2px solid black; width: 300px;
     position: relative;
     margin: 0.5rem auto;
 }

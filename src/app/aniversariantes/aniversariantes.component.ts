@@ -23,7 +23,7 @@ export class AniversariantesComponent implements OnInit {
         this.id = parametros['id']
         this.buscarAniversariantes()
       } else {
-        this.id = prompt('Adicione o mês de aniversário')
+        this.id = prompt('Digite o número do mês de aniversário')
         this.router.navigate([`aniversariantes/${this.id}`])
       }
     })

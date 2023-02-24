@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { UsuarioService } from '../service/usuario.service';
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'app-emails',
@@ -11,8 +12,16 @@ import { UsuarioService } from '../service/usuario.service';
 export class EmailsComponent implements OnInit {
 
   emails: Array<string> = []
+  cities2: string[];
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private usuarioService: UsuarioService) { 
+    this.cities2 = [
+      'New York',
+      'Rome',
+      'London',
+      'Istanbul',
+      'Paris']
+  }
 
   ngOnInit(): void {
     this.buscarEmails()
