@@ -6,7 +6,9 @@ import { FormsModule } from '@angular/forms'
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
-import {TooltipModule} from 'primeng/tooltip';
+import { TooltipModule } from 'primeng/tooltip';
+import {ToolbarModule} from 'primeng/toolbar';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +27,7 @@ import { LetraInicialComponent } from './letra-inicial/letra-inicial.component';
     CadastroComponent,
     AniversariantesComponent,
     EmailsComponent,
-    LetraInicialComponent
+    LetraInicialComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { LetraInicialComponent } from './letra-inicial/letra-inicial.component';
     ButtonModule,
     TableModule,
     CalendarModule,
-    TooltipModule
+    TooltipModule,
+    ToolbarModule
   ],
   providers: [UsuarioService],
   bootstrap: [AppComponent]

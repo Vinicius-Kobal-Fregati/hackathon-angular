@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioSemSenhaDTO } from '../DTO/UsuarioSemSenhaDTO';
 import { UsuarioService } from '../service/usuario.service';
 
@@ -13,7 +13,8 @@ export class LetraInicialComponent implements OnInit {
   caracter: string = ''
   usuarios: Array<UsuarioSemSenhaDTO> = []
 
-  constructor(private route: ActivatedRoute, private usuarioService: UsuarioService) { }
+  constructor(private route: ActivatedRoute, private usuarioService: UsuarioService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(parametros => {
@@ -32,5 +33,16 @@ export class LetraInicialComponent implements OnInit {
       })
       this.usuarios = usuarios
     })
+  }
+
+  excluirUsuario = (id: any) => {
+    this.usuarioService.excluirUsuario(id).subscribe(
+      success => this.ngOnInit(),
+      error => alert("Item não excluído" + error)
+    )
+  }
+
+  editarUsuario = (id: any) => {
+    this.router.navigate([`cadastro/${id}`])
   }
 }

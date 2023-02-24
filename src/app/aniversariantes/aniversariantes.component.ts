@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioSemSenhaDTO } from '../DTO/UsuarioSemSenhaDTO';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../service/usuario.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class AniversariantesComponent implements OnInit {
   id: any
   usuarios: Array<UsuarioSemSenhaDTO> = []
 
-  constructor(private usuarioService: UsuarioService, private activatedRoute: ActivatedRoute) { }
+  constructor(private usuarioService: UsuarioService,
+    private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(parametros => {
@@ -36,5 +37,16 @@ export class AniversariantesComponent implements OnInit {
         alert("Nenhum aniversariante encontrado")
       }
     })
+  }
+
+  editarUsuario = (id: any) => {
+    this.router.navigate([`cadastro/${id}`])
+  }
+
+  excluirUsuario = (id: any) => {
+    this.usuarioService.excluirUsuario(id).subscribe(
+      success => this.ngOnInit(),
+      error => alert("Item não excluído" + error)
+    )
   }
 }

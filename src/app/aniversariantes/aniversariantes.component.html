@@ -1,6 +1,6 @@
 <p>aniversariantes works!</p>
 <div class="card">
-  <h5>Usuarios</h5>
+  <h5>Usuários</h5>
   <p-table [value]="usuarios" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" styleClass="p-datatable-gridlines"
       currentPageReportTemplate="Exibindo do {first}° até o {last}° de {totalRecords} usuários" [rowsPerPageOptions]="[10,25,50]">
       <ng-template pTemplate="colgroup">
@@ -12,6 +12,7 @@
             <col style="width:16%">
             <col style="width:20%">
             <col style="width:35%">
+            <col style="width:12%">
             <col style="width:12%">
         </colgroup>
     </ng-template>
@@ -25,6 +26,7 @@
             <th>Data de criação</th>
             <th>Data de atualização</th>
             <th>Excluir</th>
+            <th>Editar</th>
           </tr>
       </ng-template>
       <ng-template pTemplate="body" let-usuario>
@@ -38,6 +40,8 @@
             <td>{{usuario.dataDeAtualizacao}}</td>
             <td><button pButton type="button" class="p-button-raised p-button-rounded p-button-danger p-button-sm"
               (click) = "excluirUsuario(usuario.id)" icon="pi pi-trash"></button></td>
+            <td><button pButton type="button" class="p-button-raised p-button-rounded p-button-warning p-button-sm"
+              (click) = "editarUsuario(usuario.id)" icon="pi pi-pencil"></button></td>
           </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">

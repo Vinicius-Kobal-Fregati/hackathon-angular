@@ -1,3 +1,13 @@
 <h1>Hackathon Angular IO</h1>
-
+<p-toolbar>
+    <div class="p-toolbar-group-left">
+        <p-button [routerLink]="['cadastro']" label="Criar usuário" icon="pi pi-plus" styleClass="p-button-success"></p-button>     
+    </div>
+    
+    <div class="p-toolbar-group-right">
+        <p-button [routerLink]="['home']" label="Home" icon="pi pi-home" style="margin: 0.5rem"></p-button>
+        <p-button label="Aniversariantes" icon="pi pi-search" style="margin: 0.5rem"></p-button>
+        <p-button label="Buscar usuários pela inicial" icon="pi pi-search" styleClass="p-button-success" style="margin: 0.5rem"></p-button>
+    </div>
+</p-toolbar>
 <router-outlet></router-outlet>

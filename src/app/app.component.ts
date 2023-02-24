@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -10,6 +11,10 @@ export class AppComponent implements OnInit {
 
   title = 'hackathon-angular';
   items: MenuItem[];
+
+  constructor(
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.items = [{
@@ -41,5 +46,9 @@ export class AppComponent implements OnInit {
           }
         ]}
     ];
+  }
+
+  criarUsuario = () => {
+    this.router.navigate(['home'])
   }
 }
