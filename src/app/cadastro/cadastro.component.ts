@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UsuarioCriacaoDTO } from '../DTO/UsuarioCriacaoDTO';
-import { DatePipe, formatDate } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
+import { UsuarioCriacaoDTO } from '../DTO/UsuarioCriacaoDTO';
 import { UsuarioService } from '../service/usuario.service';
 import { Encriptor } from '../Utils/Encriptor';
+import { AjustadorDeDatas } from '../Utils/AjustadorDeDatas';
 
 @Component({
   selector: 'app-cadastro',
@@ -29,7 +30,7 @@ export class CadastroComponent implements OnInit {
         this.id = parametros['id']
         this.textoBotao = 'Editar'
         this.usuarioService.receberUsuario(this.id).subscribe(usuario => {
-          usuario.dataDeNascimento = new Date(usuario.dataDeNascimento[0], usuario.dataDeNascimento[1] -1, usuario.dataDeNascimento[2])
+          usuario.dataDeNascimento = AjustadorDeDatas.ajustaData(usuario.dataDeNascimento)
           this.usuario = usuario
         })
       }
@@ -45,9 +46,9 @@ export class CadastroComponent implements OnInit {
         complete: () => {
           this.router.navigate(['home'])
         },
-        error: () => {
+        error: (error: HttpErrorResponse) => {
           this.usuario.senha = Encriptor.descriptografaSenha(this.usuario.senha)
-          alert("Erro ao salvar")
+          alert("Erro ao salvar: " + error.error)
         }
       })
     }
@@ -58,9 +59,9 @@ export class CadastroComponent implements OnInit {
       complete: () => {
         this.router.navigate(['home'])
       },
-      error: () => {
+      error: (error: HttpErrorResponse) => {
         this.usuario.senha = Encriptor.descriptografaSenha(this.usuario.senha)
-        alert("Erro ao salvar")
+        alert("Erro ao editar: " + error.error)
       }
     })
   }
