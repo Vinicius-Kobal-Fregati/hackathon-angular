@@ -17,8 +17,9 @@ import { AjustadorDeDatas } from '../Utils/AjustadorDeDatas';
 export class CadastroComponent implements OnInit {
 
   id: any 
-  usuario: UsuarioCriacaoDTO = new UsuarioCriacaoDTO() 
+  usuario: UsuarioCriacaoDTO = new UsuarioCriacaoDTO()
   textoBotao: string = 'Salvar'
+  iconeBotao: string = 'pi pi-save'
 
   constructor(
     private usuarioService: UsuarioService,
@@ -32,6 +33,7 @@ export class CadastroComponent implements OnInit {
       if (parametros['id']) {
         this.id = parametros['id']
         this.textoBotao = 'Editar'
+        this.iconeBotao = 'pi pi-user-edit'
         this.usuarioService.receberUsuario(this.id).subscribe(usuario => {
           usuario.dataDeNascimento = AjustadorDeDatas.ajustaData(usuario.dataDeNascimento)
           this.usuario = usuario
