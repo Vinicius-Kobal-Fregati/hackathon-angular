@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioSemSenhaDTO } from '../DTO/UsuarioSemSenhaDTO';
 import { UsuarioService } from '../service/usuario.service';
+import { AjustadorDeDatas } from '../Utils/AjustadorDeDatas';
 
 @Component({
   selector: 'app-letra-inicial',
@@ -21,6 +22,9 @@ export class LetraInicialComponent implements OnInit {
       if (parametros['caracter']) {
         this.caracter = parametros['caracter']
         this.recebeUsuarioPelaInicial()
+      } else {
+        this.caracter = prompt('Digite o caracter')
+        this.router.navigate([`inicial/${this.caracter}`])
       }
     })
   }
@@ -28,8 +32,7 @@ export class LetraInicialComponent implements OnInit {
   recebeUsuarioPelaInicial = () => {
     this.usuarioService.buscaUsuarioPelaInicial(this.caracter.charAt(0)).subscribe((usuarios: Array<UsuarioSemSenhaDTO>) => {
       usuarios.forEach((usuario) => {
-        let dataCriacao = usuario.dataDeCriacao
-        usuario.dataDeCriacao = new Date(dataCriacao[0], dataCriacao[1] - 1, dataCriacao[2], dataCriacao[3], dataCriacao[4])
+        this.ajustarDatas(usuario)
       })
       this.usuarios = usuarios
     })
@@ -44,5 +47,11 @@ export class LetraInicialComponent implements OnInit {
 
   editarUsuario = (id: any) => {
     this.router.navigate([`cadastro/${id}`])
+  }
+
+  ajustarDatas = (usuario: any) => {
+    usuario.dataDeNascimento = AjustadorDeDatas.ajustaData(usuario.dataDeNascimento)
+    usuario.dataDeCriacao = AjustadorDeDatas.ajustaDataEHora(usuario.dataDeCriacao)
+    usuario.dataDeAtualizacao = AjustadorDeDatas.ajustaDataEHora(usuario.dataDeAtualizacao)
   }
 }

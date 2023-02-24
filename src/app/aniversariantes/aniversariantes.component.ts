@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioSemSenhaDTO } from '../DTO/UsuarioSemSenhaDTO';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioService } from '../service/usuario.service';
+import { AjustadorDeDatas } from '../Utils/AjustadorDeDatas';
 
 @Component({
   selector: 'app-aniversariantes',
@@ -21,6 +22,9 @@ export class AniversariantesComponent implements OnInit {
       if (parametros['id']) {
         this.id = parametros['id']
         this.buscarAniversariantes()
+      } else {
+        this.id = prompt('Adicione o mês de aniversário')
+        this.router.navigate([`aniversariantes/${this.id}`])
       }
     })
   }
@@ -29,8 +33,7 @@ export class AniversariantesComponent implements OnInit {
     this.usuarioService.buscarAniversariantes(this.id).subscribe((usuarios: Array<UsuarioSemSenhaDTO>) => {
       if (usuarios.length > 0) {
         usuarios.forEach((usuario) => {
-          let dataCriacao = usuario.dataDeCriacao
-          usuario.dataDeCriacao = new Date(dataCriacao[0], dataCriacao[1] - 1, dataCriacao[2], dataCriacao[3], dataCriacao[4])
+          this.ajustarDatas(usuario)
         })
         this.usuarios = usuarios
       } else {
@@ -48,5 +51,11 @@ export class AniversariantesComponent implements OnInit {
       success => this.ngOnInit(),
       error => alert("Item não excluído" + error)
     )
+  }
+
+  ajustarDatas = (usuario: any) => {
+    usuario.dataDeNascimento = AjustadorDeDatas.ajustaData(usuario.dataDeNascimento)
+    usuario.dataDeCriacao = AjustadorDeDatas.ajustaDataEHora(usuario.dataDeCriacao)
+    usuario.dataDeAtualizacao = AjustadorDeDatas.ajustaDataEHora(usuario.dataDeAtualizacao)
   }
 }

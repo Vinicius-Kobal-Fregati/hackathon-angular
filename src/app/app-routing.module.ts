@@ -13,8 +13,10 @@ const routes: Routes = [
   { path: 'home/:id', component: HomeComponent },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'cadastro/:id', component: CadastroComponent },
+  { path: 'aniversariantes', component: AniversariantesComponent },
   { path: 'aniversariantes/:id', component: AniversariantesComponent },
   { path: 'emails', component: EmailsComponent },
+  { path: 'inicial', component: LetraInicialComponent},
   { path: 'inicial/:caracter', component: LetraInicialComponent}
 ];
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioSemSenhaDTO } from '../DTO/UsuarioSemSenhaDTO';
 import { UsuarioService } from '../service/usuario.service';
+import { AjustadorDeDatas } from '../Utils/AjustadorDeDatas';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -34,17 +35,17 @@ export class HomeComponent implements OnInit {
   }
 
   receberTodosUsuarios = () => {
-    this.usuarioService.listarTodos().subscribe((users) => {
-      users.forEach((user) => {
-        let dataCriacao = user.dataDeCriacao
-        user.dataDeCriacao = new Date(dataCriacao[0], dataCriacao[1] - 1, dataCriacao[2], dataCriacao[3], dataCriacao[4])
+    this.usuarioService.listarTodos().subscribe((usuarios) => {
+      usuarios.forEach((usuario) => {
+        this.ajustarDatas(usuario)
       })
-      this.usuarios = users
+      this.usuarios = usuarios
     })
   }
 
   receberUsuario = () => {
     this.usuarioService.receberUsuario(this.id).subscribe((usuario) => {
+      this.ajustarDatas(usuario)
       this.usuarios.push(usuario)
     })
   }
@@ -58,6 +59,11 @@ export class HomeComponent implements OnInit {
 
   editarUsuario = (id: any) => {
     this.router.navigate([`cadastro/${id}`])
+  }
+
+  ajustarDatas = (usuario: any) => {
+    usuario.dataDeCriacao = AjustadorDeDatas.ajustaDataEHora(usuario.dataDeCriacao)
+    usuario.dataDeAtualizacao = AjustadorDeDatas.ajustaDataEHora(usuario.dataDeAtualizacao)
   }
 
   next() {
